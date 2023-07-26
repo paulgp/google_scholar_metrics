@@ -16,7 +16,7 @@ FINANCE_URL = "https://scholar.google.com/citations?view_op=top_venues&hl=en&vq=
 # It also pulls the url link to the journal's page on Google Scholar listed in the h5-index.
 def pull_journals(url):
     # Pull the html from the url
-    page = requests.get(url,  headers = {'User-agent': 'pgp'})
+    page = requests.get(url)
     soup = BeautifulSoup(page.content, 'html.parser')
     # Pull the journal names and h5-indexes
     journals = soup.find_all('td', class_='gsc_mvt_t')
@@ -43,7 +43,7 @@ def pull_journals(url):
 # This function pulls the paper titles, authors, year and cites from a journal's page on Google Scholar.
 def pull_papers(url, journal_name):
     # Pull the html from the url
-    page = requests.get(url,  headers = {'User-agent': 'pgp'})
+    page = requests.get(url)
     soup = BeautifulSoup(page.content, 'html.parser')
     # Pull the paper titles
     titles = soup.find_all('a', class_='gsc_mp_anchor_lrge')
@@ -92,7 +92,7 @@ if __name__ == '__main__':
         print(journal_name)
         df2 = pull_papers(journal, journal_name)
         print(df2)
-        df2.to_csv('data/' + journal_name + '.csv', mode='a', header=False)
+        df2.to_csv('data/' + journal_name + '.csv')
         time.sleep(5)
 
 
