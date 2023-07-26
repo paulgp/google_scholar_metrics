@@ -84,15 +84,15 @@ def pull_papers(url, journal_name):
 
 if __name__ == '__main__':
     df_econ = pull_journals(ECON_URL)
-    df_econ.to_csv('econ_journals.csv')
+    df_econ.to_csv('data/econ_journals.csv')
     df_finance = pull_journals(FINANCE_URL)
     print(df_finance)
-    df_finance.to_csv('finance_journals.csv')
+    df_finance.to_csv('data/finance_journals.csv')
     for journal, journal_name in zip([*df_econ['Link'], *df_finance['Link']], [*df_econ['Journal'], *df_finance['Journal']]):
         print(journal_name)
         df2 = pull_papers(journal, journal_name)
         print(df2)
-        df2.to_csv(journal_name + '.csv', mode='a', header=False)
+        df2.to_csv('data/' + journal_name + '.csv', mode='a', header=False)
         time.sleep(5)
 
 
